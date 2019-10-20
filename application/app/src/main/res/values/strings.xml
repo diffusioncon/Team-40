@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">DUni</string>
+    <string name="title_home">Home</string>
+    <string name="title_courses">Search</string>
+    <string name="title_certificate">Certificates</string>
+    <string name="title_profile">Profile</string>
+    <string name="user_name">Hi, Matthew!</string>
+    <string name="login_text">E-learning platform, providing free\neducation in exchange of user generated\ndata, useful for recruiters and course\nauthors.</string>
+    <string name="login_btn">LOGIN WITH JOLOCOM</string>
+    <string name="login_based">based</string>
+    <string name="jolocom_package_name">com.jolocomwallet</string>
+    <string name="google_play_market_link_template">market://details?id=</string>
+    <string name="google_play_web_link_template">https://play.google.com/store/apps/details?id=</string>
+
+</resources>

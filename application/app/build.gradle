@@ -1,0 +1,104 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.1"
+    defaultConfig {
+        applicationId "com.tlabscloud.duni"
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+android.buildTypes.each { type ->
+    loadToken(type, 'BACKEND_BASE_URL', 'app.backend.base-url')
+    loadToken(type, 'STAX_BASE_URL', 'app.stax.base-url')
+    loadToken(type, 'MQTT_BROKER_URL', 'app.mqtt.broker.url')
+    loadToken(type, 'KEYCLOAK_CLIENT', 'app.keycloak.client.name')
+    loadToken(type, 'KEYCLOAK_CLIENT_SECRET', 'app.keycloak.client.secret')
+    loadToken(type, 'KEYCLOAK_USER_PASS', 'app.keycloak.user.pass')
+}
+
+def loadToken(type, varName, propName) {
+    def token = System.getenv(varName)
+    if (token == null) {
+        file("../local.properties").with { propFile ->
+            if (propFile.canRead()) {
+                def properties = new Properties()
+                properties.load(new FileInputStream(propFile))
+                token = properties[propName]
+            } else {
+                println 'Unable to read local.properties'
+            }
+        }
+    }
+    type.buildConfigField 'String', varName, '"' + token + '"'
+}
+ext {
+    // App dependencies versions
+    coroutinesVersion = '1.0.1'
+    retrofitVersion = '2.6.0'
+    okhttpLoggingInterceptor = '3.11.0'
+    androidXPreference = '1.1.0'
+    navigationVersion = '1.0.0'
+    roomVersion = '2.1.0'
+    kodeinVersion = '6.2.0'
+    jwtVersion = '1.1.1'
+    ankoVersion = '0.10.2'
+}
+dependencies {
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    implementation "android.arch.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
+
+    // DI (Kodein)
+    implementation "org.kodein.di:kodein-di-generic-jvm:$kodeinVersion"
+    implementation "org.kodein.di:kodein-di-framework-android-x:$kodeinVersion"
+
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.preference:preference-ktx:$androidXPreference"
+    // JWT
+    implementation "com.auth0.android:jwtdecode:$jwtVersion"
+
+    // anko
+    implementation "org.jetbrains.anko:anko-common:$ankoVersion"
+
+    // coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingInterceptor"
+    implementation('com.squareup.okhttp3:okhttp-urlconnection:3.10.0') {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
+
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation 'com.google.android.material:material:1.0.0'
+}

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/gradient_bg"
+    android:orientation="vertical"
+    tools:context=".ui.login.LoginFragment">
+
+    <ImageView
+        android:layout_width="208dp"
+        android:layout_height="129dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="151dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/duni_logo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="37dp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center_horizontal"
+        android:text="@string/login_text"
+        android:textColor="@color/colorWhite"
+        android:textSize="17dp" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="51dp"
+        android:background="@drawable/btn_bg"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/login_btn"
+        android:textAllCaps="true"
+        android:textColor="@color/colorBlack"
+        android:textSize="20dp" />
+
+    <ImageView
+        android:layout_width="71dp"
+        android:layout_height="34dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="51dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_duni_stax_logo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="13dp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center_horizontal"
+        android:text="@string/login_based"
+        android:textColor="@color/colorWhite70"
+        android:textSize="17dp" />
+
+
+</LinearLayout>

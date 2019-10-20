@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/mainFragment"
+    android:id="@+id/nav_graph">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.tlabscloud.duni.ui.main.MainFragment"
+        android:label="MainFragment">
+        <argument
+            android:name="token"
+            android:defaultValue="none"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_mainFragment_to_lessonsFragment"
+            app:destination="@id/lessonsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.tlabscloud.duni.ui.login.LoginFragment"
+        android:label="LoginFragment">
+        <argument
+            android:name="token"
+            app:argType="string" />
+        <deepLink app:uri="dflow://authenticate/{token}" />
+    </fragment>
+    <fragment
+        android:id="@+id/lessonsFragment"
+        android:name="com.tlabscloud.duni.ui.main.LessonsFragment"
+        android:label="LessonsFragment" />
+</navigation>
